@@ -1,6 +1,7 @@
 ---
 import Layout from '@/src/layouts/Layout.astro';
-const posts = await Astro.glob('./blog/*.md');
+import { getCollection } from 'astro:content';
+const posts = await getCollection('posts');
 ---
 
 <Layout>
@@ -11,8 +12,8 @@ const posts = await Astro.glob('./blog/*.md');
     {
       posts.map((post) => (
         <li>
-          <a class="underline" href={post.url}>
-            {post.frontmatter.title}
+          <a class="underline" href={`/blog/${post.id}`}>
+            {post.data.title}
           </a>
         </li>
       ))
