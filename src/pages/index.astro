@@ -1,11 +1,18 @@
 ---
 import Layout from '@/src/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-const posts = await getCollection('posts');
+//const posts = await getCollection('posts');
+let posts = await getCollection('posts');
+
+posts = posts
+  .slice(-4)
+  .sort(
+    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+  );
 ---
 
 <Layout>
-  <h1>Astro</h1>
+  <h1>JFC's Astro Blog</h1>
 
   <p class="my-4">Blog posts:</p>
   <ul class="list-inside list-disc">
@@ -15,6 +22,7 @@ const posts = await getCollection('posts');
           <a class="underline" href={`/blog/${post.id}`}>
             {post.data.title}
           </a>
+          <span>({post.data.date.toLocaleDateString()})</span>
         </li>
       ))
     }
