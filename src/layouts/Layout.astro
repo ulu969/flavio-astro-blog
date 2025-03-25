@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 const { frontmatter, title } = Astro.props;
 ---
@@ -22,6 +23,7 @@ const { frontmatter, title } = Astro.props;
         font-weight: bold;
       }
     </style>
+    <ClientRouter />
     <link
       rel="alternate"
       type="application/rss+xml"

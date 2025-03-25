@@ -4,11 +4,18 @@ import { getCollection } from 'astro:content';
 //const posts = await getCollection('posts');
 let posts = await getCollection('posts');
 
+const tags: string[] = [];
+posts.map((post) => {
+  post.data.tags.map((tag) => {
+    if (!tags.includes(tag)) tags.push(tag);
+  });
+});
+
 posts = posts
-  .slice(-4)
   .sort(
     (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-  );
+  )
+  .slice(0, 3);
 ---
 
 <Layout title="JFC Blog">
@@ -30,4 +37,17 @@ posts = posts
   <p class="py-4">
     <a class="underline" href={'/blog/page/1'}> See all posts ▶︎ </a>
   </p>
+  <p class="my-4">Explore by tag:</p>
+  <div class="my-4 space-x-2">
+    {
+      tags.map((tag) => (
+        <a
+          href={`/tag/${tag}`}
+          class="border border-black py-1 px-2 rounded-lg"
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </div>
 </Layout>
