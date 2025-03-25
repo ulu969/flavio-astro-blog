@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-const { frontmatter } = Astro.props;
+const { frontmatter, title } = Astro.props;
 ---
 
 <html lang="en">
@@ -9,7 +9,13 @@ const { frontmatter } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>JFC Astro Blog</title>
+    <meta
+      name="description"
+      content={frontmatter?.description
+        ? frontmatter.description
+        : 'Awesome blog from JFC'}
+    />
+    <title>{title}</title>
     <style is:global>
       h1 {
         font-size: 1.5rem;
@@ -27,8 +33,8 @@ const { frontmatter } = Astro.props;
     {
       Astro.url.pathname !== '/' && (
         <p class="py-4">
-          <a class="underline" href={'/rss.xml'}>
-            My Rss Feed
+          <a class="underline" href={'/'}>
+            ◀︎ Back to the homepage
           </a>
         </p>
       )
