@@ -1,5 +1,4 @@
 ---
-import '../styles/global.css';
 const { frontmatter } = Astro.props;
 ---
 
@@ -9,7 +8,7 @@ const { frontmatter } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>JFC Astro Blog</title>
+    <title>Astro</title>
     <style is:global>
       h1 {
         font-size: 1.5rem;
@@ -19,7 +18,7 @@ const { frontmatter } = Astro.props;
     <link
       rel="alternate"
       type="application/rss+xml"
-      title="JFC most cool blog"
+      title="My cool blog"
       href="/rss.xml"
     />
   </head>
@@ -27,13 +26,12 @@ const { frontmatter } = Astro.props;
     {
       Astro.url.pathname !== '/' && (
         <p class="py-4">
-          <a class="underline" href={'/rss.xml'}>
-            My Rss Feed
+          <a class="underline" href={'/'}>
+            ◀︎ Back to the homepage
           </a>
         </p>
       )
     }
-
     {frontmatter?.title && <h1>{frontmatter.title}</h1>}
     <slot />
   </body>
